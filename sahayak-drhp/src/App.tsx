@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useStore } from './store'
+import { syncRouteFromLocation, useStore } from './store'
 import { Toasts } from './components/ui'
 import Landing from './pages/Landing'
 import Ingest from './pages/Ingest'
@@ -7,6 +8,13 @@ import Workspace from './pages/Workspace'
 
 export default function App() {
   const screen = useStore((s) => s.screen)
+
+  useEffect(() => {
+    syncRouteFromLocation()
+    window.addEventListener('popstate', syncRouteFromLocation)
+    return () => window.removeEventListener('popstate', syncRouteFromLocation)
+  }, [])
+
   return (
     <>
       <AnimatePresence mode="wait">
