@@ -52,7 +52,7 @@ const STEP_STAGE: Record<StepId, string> = {
 }
 
 export default function Workspace() {
-  const { step, goStep, showToast, issuerMode, setIssuerMode, setJumpTarget } = useStore()
+  const { step, goStep, showToast, issuerMode, setIssuerMode, setJumpTarget, goScreen } = useStore()
   const mainRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLDivElement>(null)
   const [navOpen, setNavOpen] = useState(false)
@@ -186,6 +186,9 @@ export default function Workspace() {
               </div>
 
               <div className="flex items-center gap-2">
+                <button onClick={() => goScreen('dashboard')} className="btn btn-ghost btn-sm">
+                  Back to dashboard
+                </button>
                 <button onClick={() => showToast('Draft exported as PDF (mock)')} className="btn btn-ghost btn-sm hidden sm:inline-flex">
                   <Download size={15} /> Export
                 </button>

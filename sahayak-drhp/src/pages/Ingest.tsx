@@ -39,7 +39,7 @@ export default function Ingest() {
 
   function enterWorkspace() {
     setCrawlDone(true)
-    go('workspace')
+    go('dashboard')
   }
 
   function goHome() {

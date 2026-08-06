@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type Screen = 'landing' | 'ingest' | 'workspace'
+export type Screen = 'landing' | 'dashboard' | 'ingest' | 'workspace'
 export type StepId = 'base' | 'kyc' | 'eligibility' | 'synthesis' | 'gaps' | 'final'
 export type IssuerMode = 'expert' | 'firstTime'
 export type JumpTarget =
@@ -60,12 +60,16 @@ export function parsePath(pathname: string): Pick<State, 'screen' | 'step'> {
     if (isStepId(maybeStep)) return { screen: 'workspace', step: maybeStep }
   }
   if (pathname === '/workspace') return { screen: 'workspace', step: 'base' }
+  if (pathname === '/dashboard') return { screen: 'dashboard', step: 'base' }
+  if (pathname === '/') return { screen: 'landing', step: 'base' }
   return { screen: 'landing', step: 'base' }
 }
 
 function pathFor(screen: Screen, step: StepId) {
   if (screen === 'ingest') return '/ingest'
   if (screen === 'workspace') return `/workspace/${step}`
+  if (screen === 'dashboard') return '/dashboard'
+  if (screen === 'landing') return '/'
   return '/'
 }
 
